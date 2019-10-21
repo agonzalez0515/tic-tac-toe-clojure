@@ -29,9 +29,7 @@
 
 (defn valid?
   [position]
-  (if (some #(= position %) (initial-board)) 
-    true 
-    false))
+  (boolean (some #(= position %) (initial-board))))
 
 (defn valid-move? 
   [board position]
@@ -41,7 +39,8 @@
   [board position marker]
   (if (valid-move? board position)
     (place-marker board position marker)
-    (println "Invalid move")))
+    (println "Invalid move"))) 
+
 
 ;====Player=====
 (defn player 
@@ -60,7 +59,6 @@
 
 
 ;====UI=====
-
 (defn first-player-message
   [[player1 player2]]
   (println "Player 1 is" (:marker player1)))
