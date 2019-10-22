@@ -9,4 +9,4 @@
           (it "sets a current player"
               (should= "X" (:marker (current-player players))))
           (it "gets player input"
-              (should= 1 (with-in-str "1" (get-player-move)))))
+              (should= 1 (with-in-str "1" (get-move)))))

@@ -10,6 +10,6 @@
   [[player1 player2]]
   player1)
 
-(defn get-player-move
+(defn get-move
   []
   (read-string (read-line)))
