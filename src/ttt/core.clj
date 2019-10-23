@@ -12,7 +12,7 @@
   [board players]
   (swap! game-state 
         (fn [current-state]
-           (merge current-state {:board board :current-player (first players)}))))
+           (merge current-state {:board board :players players :current-player (first players)}))))
 
 (defn play 
   []
