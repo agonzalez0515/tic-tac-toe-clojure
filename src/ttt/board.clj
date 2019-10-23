@@ -7,16 +7,6 @@
   ([]
    (initial-board 3)))
 
-(defn add-padding
-  [row]
-  (clojure.string/join " | " row))
-
-(defn print-board
-  [board]
-  (let [size (math/sqrt (count board))]
-    (let [rows (into [] (map add-padding (partition size board)))
-          divider (str "\n" (clojure.string/join (repeat (count (first rows)) "-")) "\n")]
-      (println (str "\n" (clojure.string/join divider rows))))))
 
 (defn place-marker
   [board position marker]

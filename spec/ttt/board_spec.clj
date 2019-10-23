@@ -5,8 +5,6 @@
 (describe "Board"
           (it "creates a new empty board"
               (should= [0 1 2 3 4 5 6 7 8] (initial-board)))
-          (it "prints a board"
-              (should= "\n0 | 1 | 2\n---------\n3 | 4 | 5\n---------\n6 | 7 | 8\n" (with-out-str (print-board (initial-board)))))
           (it "places a move on the board"
               (should= ["X" 1 2 3 4 5 6 7 8] (place-marker [0 1 2 3 4 5 6 7 8] 0 "X")))
           (it "checks if a position is available"
