@@ -4,7 +4,7 @@
             [ttt.player :as player]
             [ttt.ui :as ui]))
 
-(def game-state (atom {:board (board/initial-board)
+(def game-state (atom {:board (board/create-initial-board)
                        :players player/players
                        :current-player (first player/players)}))
 

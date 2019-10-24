@@ -4,9 +4,9 @@
 
 (describe "Board"
           
-  (context "#initial-board"
+  (context "#create-initial-board"
     (it "creates a new empty board"
-      (should= [0 1 2 3 4 5 6 7 8] (initial-board))))
+      (should= [0 1 2 3 4 5 6 7 8] (create-initial-board))))
           
   (context "#make-move"
     (it "returns a new board when a valid move is entered"
