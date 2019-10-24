@@ -10,11 +10,11 @@
   [board position marker]
   (assoc board position marker))
 
-(defn initial-board
+(defn create-initial-board
   ([board-size]
-   (into [] (range (* board-size board-size))))
+   (into [] (range (math/expt board-size 2))))
   ([]
-   (initial-board 3)))
+   (create-initial-board 3)))
 
 (defn make-move
   [board position marker]
