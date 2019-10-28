@@ -25,7 +25,7 @@
 
 
 (defn -main
-  [& args]
+  []
   (ui/print-start-game-message player/players)
   (play))
 

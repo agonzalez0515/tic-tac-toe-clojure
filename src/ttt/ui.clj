@@ -7,7 +7,8 @@
 
 (defn- print-first-player-message
   [[player1 player2]]
-  (println "Player 1 is" (:marker player1)))
+  (println "Player 1 is" (:marker player1))
+  (println "Player 2 is" (:marker player2)))
 
 (defn print-player-intructions
   []
@@ -21,10 +22,10 @@
 
 (defn print-board
   [board]
-  (let [size (math/sqrt (count board))]
-    (let [rows (into [] (map add-padding-to-cells (partition size board)))
-          divider (str "\n" (clojure.string/join (repeat (count (first rows)) "-")) "\n")]
-      (println (str "\n" (clojure.string/join divider rows))))))
+  (let [size (math/sqrt (count board))
+        rows (into [] (map add-padding-to-cells (partition size board)))
+        divider (str "\n" (clojure.string/join (repeat (count (first rows)) "-")) "\n")]
+      (println (str "\n" (clojure.string/join divider rows)))))
 
 (defn print-invalid-move-message
   []
