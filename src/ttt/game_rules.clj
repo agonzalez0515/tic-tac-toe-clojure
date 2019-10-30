@@ -9,7 +9,7 @@
   [board]
  (apply mapv vector (partition (get-board-size board) board)))
 
-(defn- create-rows
+(defn create-rows
   [board]
   (apply mapv vector (create-columns board)))
   
@@ -48,7 +48,7 @@
 
 (defn tie?
   [board]
-  (and (not (available-spaces? board)) (not (win? board))))
+  (not (or (win? board) (available-spaces? board))))
 
 (defn game-over?
   [board]

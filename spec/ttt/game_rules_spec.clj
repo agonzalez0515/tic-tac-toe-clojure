@@ -4,6 +4,10 @@
 
 
 (describe "Game Rules"
+          
+  (context "create-rows"
+    (it "returns a collection of rows"
+      (should= [[0 1][2 3]] (rules/create-rows [0 1 2 3]))))
   (context "#win?"
     (it "returns false if there is no winner"
       (should= false (rules/win? ["X" "X"  "O"
