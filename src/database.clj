@@ -10,10 +10,18 @@
 
 (def stats-sql (j/create-table-ddl :stats [[:stats_id :serial "PRIMARY KEY"]
                                            [:username "TEXT"]
-                                           [:wins "INTEGER"]
-                                           [:ties "INTEGER"]
-                                           [:losses "INTEGER"]]))
+                                           [:wins :int "DEFAULT 0"]
+                                           [:ties :int "DEFAULT 0"]
+                                           [:losses :int "DEFAULT 0"]]))
 
 (println stats-sql)
 
+
+
 (j/execute! db [stats-sql])
+
+
+;need a function to save the username at the start of the game
+; check if username exists, if not, insert
+
+;need a function to save each username's result at the end of the game
