@@ -24,13 +24,11 @@
 
 (defn- create-left-to-right-diagonal
   [board]
-  (let [rows (create-rows board)]
-    (create-diagonal rows)))
+  (create-diagonal (create-rows board)))
 
 (defn- create-right-to-left-diagonal
   [board]
-  (let [rows (reverse (create-rows board))]
-    (create-diagonal rows)))
+  (create-diagonal (reverse (create-rows board))))
 
 (defn- create-groups-of-cells
   [board]
@@ -42,7 +40,7 @@
 
 (defn- available-spaces?
   [board]
-  (boolean (some true? (map number? board))))
+  (some number? board))
 
 (defn win?
   [board]

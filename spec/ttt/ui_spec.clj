@@ -11,5 +11,5 @@
     (should= "\n0 | 1 | 2\n---------\n3 | 4 | 5\n---------\n6 | 7 | 8\n" 
       (with-out-str (ui/print-board [0 1 2 3 4 5 6 7 8]))))
   (it "prints an invalid move message"
-      (should= "Invalid move. Please try again.\n" (with-out-str(ui/print-invalid-move-message)))))
+      (should= "Invalid move. Please try again.\n" (with-out-str (ui/print-invalid-move-message)))))
 

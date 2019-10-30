@@ -4,10 +4,8 @@
 
 (describe "Player"
   (context "#players"
-    (it "creates a player with marker X"
-      (should= "X" (:marker (first player/players))))
-    (it "creates a player with marker O"
-      (should= "O" (:marker (second player/players)))))
+    (it "creates a set of players"
+      (should= [{:marker "X"} {:marker "O"}] player/players)))
           
   (context "#get-move"        
     (it "gets player input and converts to integer"
