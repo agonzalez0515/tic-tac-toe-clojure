@@ -12,19 +12,23 @@
 
 (defn set-game-state
   [state board players]
-  (let [new-state {:board board :players players :current-player (first players)}]
-    (merge state new-state)))
+  (assoc state :board board :players players :current-player (first players)))
 
 (defn play
   [starting-game-sate]
   (loop [state starting-game-sate]
     (ui/print-board (:board state))
   (if (rules/game-over? (:board state))
-    (println "game over")
+    (ui/print-game-over-message)
     (let [next-board (board/make-move (:board state) (player/get-move) (:marker (:current-player state)))
           next-player (player/switch-players (:players state))]
       (recur (set-game-state state next-board next-player ))))))
 
+
+(defn play2 
+  [board]
+  (if (rules/game-over? board)
+    (ui/print-game-over-message)))
 
 
 

@@ -29,3 +29,7 @@
 (defn print-invalid-move-message
   []
   (println "Invalid move. Please try again."))
+
+(defn print-game-over-message
+  []
+  (println "Game over"))
