@@ -3,7 +3,8 @@
   (:require [ttt.board :as board]
             [ttt.player :as player]
             [ttt.ui :as ui]
-            [ttt.game-rules :as rules]))
+            [ttt.game-rules :as rules]
+            [database :as db ]))
 
 (def initial-state {:board (board/create-initial-board)
                     :players player/players
@@ -25,6 +26,19 @@
                        (:marker (:current-player state)))
           next-player (player/switch-players (:players state))]
       (recur (set-game-state state next-board next-player ))))))
+
+
+(defn save-player
+  [player]
+  (println "printing one player")
+  (println (:marker player))
+  (ui/print-player-username-question player))
+  ; (db/save-username (ui/get-player-username)))
+
+(defn save-player-usernames
+  [players]
+  (map (fn[p] (println p)) players))
+  ; (map save-player players))
 
 (defn -main
   []

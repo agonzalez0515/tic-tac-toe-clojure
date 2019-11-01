@@ -33,3 +33,11 @@
 (defn print-game-over-message
   []
   (println "Game over"))
+
+(defn print-player-username-question
+  [player]
+  (println "Player" (:marker player) "please enter your username"))
+
+(defn get-player-username
+  []
+  (read-string (read-line)))

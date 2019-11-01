@@ -12,7 +12,8 @@
                                            [:username "TEXT"]
                                            [:wins :int "DEFAULT 0"]
                                            [:ties :int "DEFAULT 0"]
-                                           [:losses :int "DEFAULT 0"]]))
+                                           [:losses :int "DEFAULT 0"]]
+                                   {:conditional? true}))
 
 (println stats-sql)
 
@@ -25,3 +26,7 @@
 ; check if username exists, if not, insert
 
 ;need a function to save each username's result at the end of the game
+
+(defn save-username
+  [username]
+  (j/insert! db :stats {:username username}))
