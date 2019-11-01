@@ -29,7 +29,6 @@
   [start-state]
   (loop [state start-state]
     (ui/print-board (:board state))
-    (println (rules/game-over? (:board state)))
   (if (rules/game-over? (:board state))
     (ui/print-game-over-message)
     (recur (set-game-state state
