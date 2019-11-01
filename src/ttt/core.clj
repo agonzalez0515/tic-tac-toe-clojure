@@ -15,8 +15,8 @@
   (assoc state :board board :players players :current-player (first players)))
 
 (defn play
-  [starting-game-sate]
-  (loop [state starting-game-sate]
+  [starting-game-state]
+  (loop [state starting-game-state]
     (ui/print-board (:board state))
   (if (rules/game-over? (:board state))
     (ui/print-game-over-message)
@@ -26,9 +26,15 @@
 
 
 (defn play2 
-  [board]
-  (if (rules/game-over? board)
-    (ui/print-game-over-message)))
+  [start-state]
+  (loop [state start-state]
+    (ui/print-board (:board state))
+    (println (rules/game-over? (:board state)))
+  (if (rules/game-over? (:board state))
+    (ui/print-game-over-message)
+    (recur (set-game-state state
+                           (board/make-move (:board state) (player/get-move) (:marker (:current-player state)))
+                           {:marker "O"})))))
 
 
 
@@ -36,4 +42,5 @@
   []
   (ui/print-start-game-message player/players)
   (play game-state))
+
 
