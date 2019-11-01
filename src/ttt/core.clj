@@ -5,7 +5,6 @@
             [ttt.ui :as ui]
             [ttt.game-rules :as rules]))
 
-
 (def game-state {:board (board/create-initial-board)
                 :players player/players
                 :current-player (first player/players)})
@@ -20,23 +19,12 @@
     (ui/print-board (:board state))
   (if (rules/game-over? (:board state))
     (ui/print-game-over-message)
-    (let [next-board (board/make-move (:board state) (player/get-move) (:marker (:current-player state)))
+    (let [next-board (board/make-move 
+                      (:board state) 
+                      (player/get-move) 
+                      (:marker (:current-player state)))
           next-player (player/switch-players (:players state))]
       (recur (set-game-state state next-board next-player ))))))
-
-
-(defn play2 
-  [start-state]
-  (loop [state start-state]
-    (ui/print-board (:board state))
-  (if (rules/game-over? (:board state))
-    (ui/print-game-over-message)
-    (recur (set-game-state state
-                           (board/make-move (:board state) (player/get-move) (:marker (:current-player state)))
-                           (player/switch-players (:players state)))))))
-
-
-
 
 (defn -main
   []
