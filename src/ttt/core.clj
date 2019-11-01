@@ -10,7 +10,7 @@
                 :players player/players
                 :current-player (first player/players)})
 
-(defn set-game-state
+(defn- set-game-state
   [state board players]
   (assoc state :board board :players players :current-player (first players)))
 
@@ -33,7 +33,8 @@
     (ui/print-game-over-message)
     (recur (set-game-state state
                            (board/make-move (:board state) (player/get-move) (:marker (:current-player state)))
-                           {:marker "O"})))))
+                           (player/switch-players (:players state)))))))
+
 
 
 
