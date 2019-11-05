@@ -34,10 +34,11 @@
   []
   (println "Game over"))
 
-(defn print-player-username-question
-  [player]
-  (println "Player" (:marker player) "please enter your username"))
+(defn- print-player-username-question
+  [player-marker]
+  (println (str "Player" player-marker "please enter your username")))
 
 (defn get-player-username
-  []
-  (read-string (read-line)))
+  [player]
+  (print-player-username-question (:marker player))
+  (read-line))

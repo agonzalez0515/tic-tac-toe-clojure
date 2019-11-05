@@ -28,19 +28,8 @@
       (recur (set-game-state state next-board next-player ))))))
 
 
-(defn save-player
-  [player]
-  (println "printing one player")
-  (println (:marker player))
-  (ui/print-player-username-question player))
-  ; (db/save-username (ui/get-player-username)))
-
-(defn save-player-usernames
-  [players]
-  (map (fn[p] (println p)) players))
-  ; (map save-player players))
-
 (defn -main
   []
   (ui/print-start-game-message player/players)
+  
   (play initial-state))

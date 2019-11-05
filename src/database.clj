@@ -15,17 +15,8 @@
                                            [:losses :int "DEFAULT 0"]]
                                    {:conditional? true}))
 
-(println stats-sql)
-
-
 
 (j/execute! db [stats-sql])
-
-
-;need a function to save the username at the start of the game
-; check if username exists, if not, insert
-
-;need a function to save each username's result at the end of the game
 
 (defn save-username
   [username]
