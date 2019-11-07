@@ -23,14 +23,16 @@
   (context "#update-stats-when-winner"
     (it "updates usernames stats when there is a winner"
       (with-redefs [db/retrieve-username (stub :db/retrieve-username {:return player1-stats})
-                    db/retrieve-username (stub :db/retrieve-username {:return player2-stats})]
+                    db/retrieve-username (stub :db/retrieve-username {:return player2-stats})
+                    j/update! (stub :j/update! {:return 1})]
         (should-invoke db/update-win {:with ["Angie"]}  (db/update-stats-when-winner "Angie" "Jon"))
         (should-invoke db/update-lost {:with ["Jon"]}  (db/update-stats-when-winner "Angie" "Jon")))))
   
   (context "#update-stats-when-tie"
     (it "updates usernames stats when there is a tie"
-      (with-redefs [db/retrieve-username (stub :db/retrieve-username {:return '(player1-stats)})
-                    db/retrieve-username (stub :db/retrieve-username {:return '(player2-stats)})]
+      (with-redefs [db/retrieve-username (stub :db/retrieve-username {:return player1-stats})
+                    db/retrieve-username (stub :db/retrieve-username {:return player2-stats})
+                    j/update! (stub :j/update! {:return 1})]
       (should-invoke db/update-tie {:with ["Angie" "Jon"]} (db/update-stats-when-tie "Angie" "Jon")))))
     
   (context "#retrieve-all-player-stats"
