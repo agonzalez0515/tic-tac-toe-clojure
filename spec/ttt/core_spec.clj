@@ -5,7 +5,8 @@
             [ttt.ui :as ui]
             [ttt.board :as board]
             [ttt.player :as player]
-            [database :as db]))
+            [database :as db]
+            [test-helpers :as helpers]))
 
 (def players [{:marker "O"} {:marker "X"}])
 
@@ -39,10 +40,8 @@
                       game/set-game-state (stub :game/set-game-state {:return state-after-one-move})
                       db/update-stats-when-winner (stub :db/update-stats-when-winner {:return 1})
                       db/retrieve-all-player-stats (stub :db/retrieve-all-player-stats {:return players-stats})
-                      rules/win? (let [results (atom [false true])]
-                                         (fn [_] (ffirst (swap-vals! results rest))))
-                      rules/tie? (let [results (atom [false true])]
-                                         (fn [_] (ffirst (swap-vals! results rest))))]
+                      rules/win? (helpers/stub-loops [false true])
+                      rules/tie? (helpers/stub-loops [false true])]
           (should-invoke board/make-move {:with [[0 1 2 3 4 5 6 7 8] 4 "X"]} (game/play initial-state))))
 
     (it "prints the new board after a move is made"
@@ -50,21 +49,15 @@
                       board/make-move (stub :board/make-move {:return [0 "X" 2 3 4 5 6 7 8]})
                       db/update-stats-when-winner (stub :db/update-stats-when-winner {:return 1})
                       db/retrieve-all-player-stats (stub :db/retrieve-all-player-stats {:return players-stats})
-                      rules/win? (let [results (atom [false true])]
-                                   (fn [_] (ffirst (swap-vals! results rest))))
-                      rules/tie? (let [results (atom [false false])]
-                                   (fn [_] (ffirst (swap-vals! results rest))))]
+                      rules/win? (helpers/stub-loops [false true])
+                      rules/tie? (helpers/stub-loops [false true])]
           (should-contain boards-printed-after-one-move (with-out-str (game/play initial-state)))))
 
     (it "prints new boards after each player makes a move"
-        (with-redefs [player/get-move (let [results (atom [4 8])]
-                                        (fn [] (ffirst (swap-vals! results rest))))
-                      board/make-move (let [results (atom [[0 1 2 3 "X" 5 6 7 8] [0 1 2 3 "X" 5 6 7 "O"]])]
-                                        (fn [_a _b _c] (ffirst (swap-vals! results rest))))
+        (with-redefs [player/get-move (helpers/stub-loops [4 8])
+                      board/make-move (helpers/stub-loops [[0 1 2 3 "X" 5 6 7 8] [0 1 2 3 "X" 5 6 7 "O"]])
                       db/update-stats-when-winner (stub :db/update-stats-when-winner {:return 1})
                       db/retrieve-all-player-stats (stub :db/retrieve-all-player-stats {:return players-stats})
-                      rules/win? (let [results (atom [false false true])]
-                                    (fn [_] (ffirst (swap-vals! results rest))))
-                        rules/tie? (let [results (atom [false false true])]
-                                    (fn [_] (ffirst (swap-vals! results rest))))]
+                      rules/win? (helpers/stub-loops [false false true])
+                      rules/tie? (helpers/stub-loops [false false true])]
           (should-contain boards-printed-after-two-moves (with-out-str (game/play initial-state)))))))

@@ -17,29 +17,29 @@
 
 (j/execute! db [stats-sql])
 
-(defn- retrieve-username
+(defn- retrieve-stats-by-username
   [username]
  (into {} (j/find-by-keys db :stats {:username username})))
 
 (defn- username-exists?
   [username]
-  (not (= 0 (count (retrieve-username username)))))
+  (not (= 0 (count (retrieve-stats-by-username username)))))
 
 
 (defn- update-win
   [username]
-  (let [wins (:wins  (retrieve-username username))]
+  (let [wins (:wins  (retrieve-stats-by-username username))]
     (j/update! db :stats {:wins (+ wins 1)} ["username = ?" username])))
 
 (defn- update-lost
   [username]
-  (let [losses (:losses (retrieve-username username))]
+  (let [losses (:losses (retrieve-stats-by-username username))]
     (j/update! db :stats {:losses (+ losses 1)} ["username = ?" username])))
 
 (defn- update-tie
   [username1 username2]
-  (let [ties-username1 (:ties (retrieve-username username1))
-        ties-username2 (:ties (retrieve-username username2))]
+  (let [ties-username1 (:ties (retrieve-stats-by-username username1))
+        ties-username2 (:ties (retrieve-stats-by-username username2))]
     (j/update! db :stats {:ties (+ ties-username1 1)} ["username = ?" username1])
     (j/update! db :stats {:ties (+ ties-username2 1)} ["username = ?" username2])))
 
@@ -60,4 +60,4 @@
 
 (defn retrieve-all-player-stats
   [names]
-  (map retrieve-username names))
+  (map retrieve-stats-by-username names))
