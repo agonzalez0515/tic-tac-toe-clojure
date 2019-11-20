@@ -5,20 +5,15 @@
   [row]
   (clojure.string/join " | " row))
 
-(defn- print-player-order-message
-  [[player1 player2]]
-  (println "Player 1 is" (:marker player1))
-  (println "Player 2 is" (:marker player2)))
 
-(defn- print-player-intructions
-  []
-  (println "Enter a number between 0-8 to select a spot."))
+(defn print-player-instructions
+  [username]
+  (println (str username " enter a number between 0-8 to select a spot.")))
 
 (defn print-start-game-message
-  [players]
-  (println "Let's play tic-tac-toe.")
-  (print-player-order-message players)
-  (print-player-intructions))
+  []
+  (println "Let's play tic-tac-toe."))
+
 
 (defn print-board
   [board]
@@ -30,6 +25,31 @@
   []
   (println "Invalid move. Please try again."))
 
-(defn print-game-over-message
+(defn print-win-message
+  [username]
+  (println (str username " wins the game")))
+
+(defn print-tie-message
   []
-  (println "Game over"))
+  (println "You tied!"))
+
+(defn- print-player-username-question
+  [player-marker]
+  (println (str "Player " player-marker"," " please enter your username")))
+
+(defn get-player-username
+  [player]
+  (print-player-username-question (:marker player))
+  (read-line))
+
+(defn print-make-move-with-name
+  [name]
+  (println (str name"," " please make a move.")))
+
+(defn print-stats
+  [stats]
+  (let [player1 (first stats)
+        player2 (second stats)]
+  (println "====PLAYER STATS====")
+  (println (str (:username player1) "- wins: " (:wins player1) " losses: " (:losses player1) " ties: " (:ties player1)))
+  (println (str (:username player2) "- wins: " (:wins player2) " losses: " (:losses player2) " ties: " (:ties player2)))))
